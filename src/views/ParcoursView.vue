@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onBeforeMount, onMounted } from 'vue'
 //components and stores
 import GlobalHeader from '@/components/GlobalHeader.vue'
 import IndivParcours from '@/components/IndivParcours.vue'
@@ -16,6 +16,13 @@ const inscrire = (parcours, user) => {
   console.log('Inscription request for parcours:', parcours)
   console.log('Inscription request for user:', user)
 }
+
+//check if curentUser is defined
+onBeforeMount(() => {
+  if (!currentUser.value) {
+    window.location.href = '/'
+  }
+})
 </script>
 
 <template>

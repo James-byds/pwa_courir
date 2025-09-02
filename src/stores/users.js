@@ -33,6 +33,8 @@ export const useUserStore = defineStore('user', {
     },
     logout() {
       this.currentUser = null
+      //redirect to home page
+      window.location.href = '/'
     },
   },
 })
