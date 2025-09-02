@@ -1,17 +1,23 @@
 <script setup>
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/users'
+
+const UserStore = useUserStore()
+const currentUser = computed(() => UserStore.currentUser)
 
 const router = useRouter()
+const currentRoute = computed(() => router.currentRoute.value)
 </script>
 
 <template>
-  <nav class="main-nav">
+  <nav class="main-nav" v-if="currentUser">
     <router-link
       v-for="route in router.getRoutes()"
       :key="route.name"
       :to="route.path"
       class="main-nav__links"
+      :class="{ 'main-nav__links--active': route.path === currentRoute.path }"
       >{{ route.name }}</router-link
     >
   </nav>
@@ -33,6 +39,12 @@ const router = useRouter()
     transition: all var(--transition-speed) ease;
     border: 1px solid var(--border-color);
     padding: 0.5rem 1rem;
+    &--active {
+      background: var(--primary-color);
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+    }
     &:hover {
       text-decoration: underline;
       color: #ddd;

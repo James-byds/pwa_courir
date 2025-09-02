@@ -25,7 +25,7 @@ export const useUserStore = defineStore('user', {
       const user = this.users.find((u) => u.login === login && u.password === password)
       console.log(user)
       if (user) {
-        this.currentUser = user.login
+        this.currentUser = user
         console.log(this.currentUser)
         return true
       }

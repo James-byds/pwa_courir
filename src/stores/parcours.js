@@ -7,41 +7,26 @@ export const useParcoursStore = defineStore('Parcours', {
   state: () => ({
     parcours: [
       {
-        _id: '1',
-        name: 'Parcours 1',
-        description: 'Description du parcours 1',
-        semaines: {
+        //parcours 0
+        _id: 0,
+        name: 'Parcours urbain',
+        description:
+          'Un parcours à travers les rues de la ville, avec des arrêts dans les parcs et les places publiques.',
+        duree: '8 semaines',
+        coureurs: [],
+        deroulement: {
           semaine1: {
-            jour1: { duree: 20, type: 'endurance', 
-              etapes: {
-                echauffement: 10,
-                endurance: 5,
-                retourAuCalme: 5,
-              }
-             },
-            jour2: { duree: 20, type: 'fractionné', 
-              etapes: {
-                echauffement: 10,
-                endurance: 5,
-                retourAuCalme: 5,
-              }
-             },
-            jour3: { duree: 20, type: 'longue', 
-              etapes: {
-                echauffement: 10,
-                endurance: 5,
-                retourAuCalme: 5,
-              }
-             },
+            jour1: {
+              distance: 5, // in km
+            },
           },
-        }
-      }
-
+        },
+      },
     ],
     currentParcours: null,
   }),
   getters: {
-    allParcourss: (state) => state.parcours,
+    allParcours: (state) => state.parcours,
   },
   actions: {},
 })

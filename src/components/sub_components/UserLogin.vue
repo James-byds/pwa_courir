@@ -11,7 +11,7 @@ const password = ref('')
 
 <template>
   <section class="user-login" v-if="currentUser">
-    <span class="user-login__label">Logged in as: {{ currentUser }}</span>
+    <span class="user-login__label">Logged in as: {{ currentUser.login }}</span>
     <button @click="UserStore.logout()" class="button is-danger">Log Out</button>
   </section>
   <section class="user-login" v-else>
