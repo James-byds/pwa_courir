@@ -1,15 +1,14 @@
 <script setup>
-import MainNav from '@/components/MainNav.vue'
+import GlobalHeader from '@/components/GlobalHeader.vue'
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/users'
-import UserLogin from '@/components/UserLogin.vue'
 
 const UserStore = useUserStore()
 const currentUser = ref(UserStore.currentUser)
 </script>
 
 <template>
-  <MainNav />
+  <GlobalHeader />
   <main class="home">
     <h1>Welcome to the Home Page</h1>
     <p>This is the main landing page of the application.</p>

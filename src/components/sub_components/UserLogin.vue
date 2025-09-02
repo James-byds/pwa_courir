@@ -12,11 +12,10 @@ const password = ref('')
 <template>
   <section class="user-login" v-if="currentUser">
     <span class="user-login__label">Logged in as: {{ currentUser }}</span>
-    <button @click="UserStore.logout()">Log Out</button>
+    <button @click="UserStore.logout()" class="button is-danger">Log Out</button>
   </section>
   <section class="user-login" v-else>
-    <span class="user-login__label">Please log in.</span>
-    <!-- Add login form or button here -->
+    <span class="user-login__label">Please log in to access more features.</span>
     <input
       type="text"
       placeholder="Login"
@@ -30,7 +29,10 @@ const password = ref('')
       class="input user-login__input"
       v-model.lazy.trim="password"
     />
-    <button class="button is-primary" @click.prevent="UserStore.authenticate(login, password)">
+    <button
+      class="button is-primary user-login__input"
+      @click.prevent="UserStore.authenticate(login, password)"
+    >
       Log In
     </button>
   </section>
@@ -38,11 +40,18 @@ const password = ref('')
 
 <style lang="scss" scoped>
 .user-login {
-  padding: 2rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   &__label {
     display: block;
-    margin-bottom: 1rem;
     color: var(--color-text);
+    width: 100%;
+    flex: 1;
+  }
+  &__input {
+    display: block;
+    max-width: 200px;
   }
 }
 </style>
