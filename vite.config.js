@@ -10,6 +10,43 @@ export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
+    //VITE PWA PLUGIN
+    VitePWA({
+      registerType: "autoUpdate",
+      manifest: {
+        name: "Je cours pour ma forme",
+        short_name: "Jcpmf",
+        description: "Application pour le suivi d'entrainement de course à pied",
+        theme_color: "#002e4a",
+        background_color: "#88ba16",
+        display: "standalone",
+        scope: "/",
+        start_url: "/",
+        icons: [//48x48 96x96 192x192 550x578
+          {
+            src: "logo-48-48.png",
+            sizes: "48x48",
+            type: "image/png"
+          },
+          {
+            src: "logo-96-96.png",
+            sizes: "96x96",
+            type: "image/png"
+          },
+          {
+            src: "logo-192-192.png",
+            sizes: "192x192",
+            type: "image/png"
+          },
+          {
+            src: "logo-550-578.png",
+            sizes: "550x578",
+            type: "image/png",
+            purpose: "any maskable"
+          }
+        ],
+      }
+    })
   ],
   resolve: {
     alias: {
