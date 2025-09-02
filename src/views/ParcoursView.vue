@@ -2,7 +2,6 @@
 import { computed, onBeforeMount, onMounted } from 'vue'
 //components and stores
 import GlobalHeader from '@/components/GlobalHeader.vue'
-import IndivParcours from '@/components/IndivParcours.vue'
 import { useParcoursStore } from '@/stores/parcours'
 const ParcoursStore = useParcoursStore()
 import { useUserStore } from '@/stores/users'

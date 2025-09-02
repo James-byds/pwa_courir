@@ -14,4 +14,5 @@ console.log('parcours props:', props.parcours)
 <template>
   <h2>Parcours Details</h2>
   {{ props.parcours.name }} - {{ props.parcours.description }}
+  <pre>{{ props.parcours.deroulement }}</pre>
 </template>

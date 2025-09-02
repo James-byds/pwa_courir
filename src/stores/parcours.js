@@ -28,5 +28,13 @@ export const useParcoursStore = defineStore('Parcours', {
   getters: {
     allParcours: (state) => state.parcours,
   },
-  actions: {},
+  actions: {
+    selectParcours(id) {
+      const parcours = this.parcours.find((p) => p._id === id)
+      if (parcours) {
+        this.currentParcours = parcours
+        return true
+      }
+    },
+  },
 })
