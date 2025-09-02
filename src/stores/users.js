@@ -11,8 +11,8 @@ export const useUserStore = defineStore('user', {
         login: 'John',
         name: 'John',
         password: 'Doe',
-        parcours_stage: 'Marathon',//placeholder
-      }
+        parcours_stage: 'Marathon', //placeholder
+      },
     ],
     currentUser: null,
   }),
@@ -20,6 +20,19 @@ export const useUserStore = defineStore('user', {
     allUsers: (state) => state.users,
   },
   actions: {
-    
-  }
+    authenticate(login, password) {
+      console.log(login, password)
+      const user = this.users.find((u) => u.login === login && u.password === password)
+      console.log(user)
+      if (user) {
+        this.currentUser = user.login
+        console.log(this.currentUser)
+        return true
+      }
+      return false
+    },
+    logout() {
+      this.currentUser = null
+    },
+  },
 })

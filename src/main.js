@@ -6,6 +6,7 @@ import router from './router'
 
 const app = createApp(App)
 
+import 'bulma/css/bulma.min.css'
 import '@/assets/main.scss'
 
 app.use(createPinia())

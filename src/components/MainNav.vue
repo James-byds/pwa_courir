@@ -1,3 +1,7 @@
+<script setup>
+import UserLogin from '@/components/UserLogin.vue'
+</script>
+
 <template>
   <nav class="main-nav">
     <h1 class="main-nav__title">My App</h1>
@@ -7,6 +11,7 @@
       </li>
       <!-- Add more navigation links as needed -->
     </ul>
+    <UserLogin />
   </nav>
 </template>
 
@@ -14,6 +19,9 @@
 .main-nav {
   background-color: #333;
   padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   &__title {
     color: white;
     margin: 0 0 0.5rem 0;
