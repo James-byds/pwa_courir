@@ -15,6 +15,7 @@ const day = computed(() => currentUser.value?.parcours.day)
 const ParcoursStore = useParcoursStore()
 const currentParcours = computed(() => ParcoursStore.currentParcours)
 
+//sent from link
 const props = defineProps({
   day: {
     type: Number,
@@ -31,6 +32,7 @@ const props = defineProps({
 const etape = ref(0) //current step in the exercices
 const timer = ref(null) //timer reference for clearing it later
 const state = ref('idle') //idle, running, paused
+const running = ref(null)
 onBeforeMount(() => {
   //recover parcours structure and program for the day
   if (currentUser.value != null) {
@@ -45,7 +47,7 @@ const program = computed(
 onMounted(() => {
   //start the timer
   timer.value = program.value[etape.value].duree * 60
-  console.log('Training started')
+  /* console.log('Training started')
   const running = setInterval(() => {
     if (timer.value > 0) {
       timer.value = timer.value - 15
@@ -59,8 +61,66 @@ onMounted(() => {
       console.log('Training finished')
       clearInterval(running)
     }
-  }, 1000)
+  }, 1000)*/
 })
+
+//clik handlers
+const startTraining = () => {
+  if (state.value === 'paused' && !running.value) {
+    state.value = 'running'
+    running.value = setInterval(() => {
+      if (timer.value > 0 && state.value === 'running') {
+        timer.value = timer.value - 15
+      } else if (program.value[etape.value + 1]) {
+        etape.value++
+        timer.value = program.value[etape.value].duree * 60
+      } else {
+        clearInterval(running.value)
+        running.value = null
+        state.value = 'idle'
+      }
+    }, 1000)
+    console.log('Training resumed')
+  } else if (state.value === 'idle' && !running.value) {
+    // fresh start
+    etape.value = 0
+    timer.value = program.value[etape.value].duree * 60
+    state.value = 'running'
+    running.value = setInterval(() => {
+      if (timer.value > 0 && state.value === 'running') {
+        timer.value = timer.value - 15
+      } else if (program.value[etape.value + 1]) {
+        etape.value++
+        timer.value = program.value[etape.value].duree * 60
+      } else {
+        clearInterval(running.value)
+        running.value = null
+        state.value = 'idle'
+      }
+    }, 1000)
+    console.log('Training started')
+  }
+}
+
+const pauseTraining = () => {
+  if (running.value) {
+    clearInterval(running.value)
+    running.value = null
+    state.value = 'paused'
+    console.log('Training paused')
+  }
+}
+
+const stopTraining = () => {
+  if (running.value) {
+    clearInterval(running.value)
+    running.value = null
+  }
+  state.value = 'idle'
+  etape.value = 0
+  timer.value = program.value[etape.value].duree * 60
+  console.log('Training stopped')
+}
 </script>
 
 <template>
@@ -75,7 +135,7 @@ onMounted(() => {
     {{ props.jour }}
     <section class="running__dashboard">
       <div class="running__dashboard__state">
-        <p>{{ etape }}/{{ program.length }}</p>
+        <p>{{ etape + 1 }}/{{ program.length }}</p>
         <p>{{ state }}</p>
       </div>
       <div class="running__dashboard__step">
@@ -95,13 +155,13 @@ onMounted(() => {
       </div>
     </section>
     <section class="controls">
-      <button class="button is-success" @click.prevent="UserStore.startTraining()">
+      <button class="button is-success" @click.prevent="startTraining()">
         Start training session
       </button>
-      <button class="button is-danger" @click.prevent="UserStore.stopTraining()">
+      <button class="button is-danger" @click.prevent="stopTraining()">
         Stop training session
       </button>
-      <button class="button is-warning" @click.prevent="UserStore.pauseTraining()">
+      <button class="button is-warning" @click.prevent="pauseTraining()">
         Pause training session
       </button>
     </section>

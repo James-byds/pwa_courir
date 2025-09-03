@@ -61,19 +61,22 @@ export const useUserStore = defineStore('user', {
       }
     },
     //training
-    startTraining() {
-      if (this.currentUser) {
-        //start the timer
-        console.log('Training started')
-        const timer = setInterval(() => {
-          if (this.currentUser.parcours.timer > 0) {
-            this.currentUser.parcours.timer--
-          } else {
-            clearInterval(timer)
-            console.log('Exercice finished')
-      }
-        }, 1000)
-      }
+    startTraining(timer, etape, program) {
+      console.log('Training started')
+      const running = setInterval(() => {
+        if (timer > 0) {
+          timer = timer - 15
+          console.log('Remaining time:', timer)
+        } else if (program[etape + 1]) {
+          console.log('Exercice finished: ' + program[etape].type)
+          etape++
+          timer = program[etape].duree * 60
+        } else {
+          etape++
+          console.log('Training finished')
+          clearInterval(running)
+        }
+      }, 1000)
     },
     pauseTraining() {
       if (this.currentUser) {
@@ -85,9 +88,8 @@ export const useUserStore = defineStore('user', {
       if (this.currentUser) {
         //stop the timer
         console.log('Training stopped')
-        
       }
-    }
+    },
     //End of training fuctions
   },
 })
