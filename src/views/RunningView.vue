@@ -30,7 +30,7 @@ const props = defineProps({
 
 const etape = ref(0) //current step in the exercices
 const timer = ref(null) //timer reference for clearing it later
-
+const state = ref('idle') //idle, running, paused
 onBeforeMount(() => {
   //recover parcours structure and program for the day
   if (currentUser.value != null) {
@@ -41,6 +41,26 @@ const program = computed(
   () => currentParcours.value.semaines[props.week - 1].jours[props.day - 1].exercices,
 )
 //access to values with program[0].type and program[0].duree
+
+onMounted(() => {
+  //start the timer
+  timer.value = program.value[etape.value].duree * 60
+  console.log('Training started')
+  const running = setInterval(() => {
+    if (timer.value > 0) {
+      timer.value = timer.value - 15
+      console.log('Remaining time:', timer.value)
+    } else if (program.value[etape.value + 1]) {
+      console.log('Exercice finished: ' + program.value[etape.value].type)
+      etape.value++
+      timer.value = program.value[etape.value].duree * 60
+    } else {
+      etape.value ++
+      console.log('Training finished')
+      clearInterval(running)
+    }
+  }, 1000)
+})
 </script>
 
 <template>
@@ -54,15 +74,25 @@ const program = computed(
     <p v-if="currentUser">Parcours Name: {{ currentParcours.name }}</p>
     {{ props.jour }}
     <section class="running__dashboard">
-      {{ etape }}/{{ program.length }}
-      <p>
+      <div class="running__dashboard__state">
+        <p>{{ etape }}/{{ program.length }}</p>
+        <p>{{ state }}</p>
+      </div>
+      <div class="running__dashboard__step">
         Current Exercice:
-        {{ program[etape].type }}
-      </p>
-      <p>
-        Estimated time for next exercice:
-        {{ program[etape].duree }} min
-      </p>
+        <p>{{ program[etape].type }}</p>
+      </div>
+      <div class="running__dashboard__timer">
+        <p>{{ timer }} sec</p>
+      </div>
+      <p>Semaine {{ week }}/ Jour {{ day }}</p>
+      <div class="running__dashboard__next">
+        <p v-if="etape < program.length - 1">
+          next exercice:
+          {{ program[etape + 1].type }} - {{ program[etape + 1].duree }} min
+        </p>
+        <p v-else>Go get it!</p>
+      </div>
     </section>
     <section class="controls">
       <button class="button is-success" @click.prevent="UserStore.startTraining()">
