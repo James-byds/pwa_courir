@@ -74,7 +74,7 @@ export const useParcoursStore = defineStore('Parcours', {
                 ],
               },
               {
-                tot_duree: 29,
+                tot_duree: 28.5,
                 exercices: [
                   {
                     type: 'échauffement',
@@ -123,7 +123,7 @@ export const useParcoursStore = defineStore('Parcours', {
                 ],
               },
               {
-                tot_duree: 31,
+                tot_duree: 32.5,
                 exercices: [
                   {
                     type: 'échauffement',
@@ -168,6 +168,1491 @@ export const useParcoursStore = defineStore('Parcours', {
                   {
                     type: 'étirements',
                     duree: 5,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            jours: [
+              {
+                tot_duree: 38,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2.5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2.5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 34,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 36,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            jours: [
+              {
+                tot_duree: 35.5,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 0.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 34.5,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 0.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 35.5,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 0.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2.5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1.5,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            jours: [
+              {
+                tot_duree: 35.5,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 0.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 37,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 0.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 0.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 39,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 0.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 0.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 1,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            jours: [
+              {
+                tot_duree: 41.5,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 2,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 0.5,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 45,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 42,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 6,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            jours: [
+              {
+                tot_duree: 44,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 46,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 6,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 48,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 6,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 7,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            jours: [
+              {
+                tot_duree: 47,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 6,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 7,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 9,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 48,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 3,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 6,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 8,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 54,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            jours: [
+              {
+                tot_duree: 50,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 6,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 8,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 52,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 6,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 52,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 6,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 8,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 8,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 8,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            jours: [
+              {
+                tot_duree: 55,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 8,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 8,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 8,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 52,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 8,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 56,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 12,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            jours: [
+              {
+                tot_duree: 55,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 12,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 14,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 55,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 12,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 14,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 54,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 12,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 14,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            jours: [
+              {
+                tot_duree: 53,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 16,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 16,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 54,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 14,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 1,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 4,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 18,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 52,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 16,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 3,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 18,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            jours: [
+              {
+                tot_duree: 52,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 10,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 25,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 52,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 5,
+                  },
+                  {
+                    type: 'marche',
+                    duree: 2,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 30,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 5,
+                  },
+                ],
+              },
+              {
+                tot_duree: 55,
+                exercices: [
+                  {
+                    type: 'échauffement',
+                    duree: 10,
+                  },
+                  {
+                    type: 'trot',
+                    duree: 40,
+                  },
+                  {
+                    type: 'étirements',
+                    duree: 1,
                   },
                 ],
               },
