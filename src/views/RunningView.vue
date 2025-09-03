@@ -66,6 +66,7 @@ onMounted(() => {
 
 //clik handlers
 const startTraining = () => {
+  //resume
   if (state.value === 'paused' && !running.value) {
     state.value = 'running'
     running.value = setInterval(() => {
@@ -116,6 +117,7 @@ const stopTraining = () => {
     clearInterval(running.value)
     running.value = null
   }
+  //resets values
   state.value = 'idle'
   etape.value = 0
   timer.value = program.value[etape.value].duree * 60
