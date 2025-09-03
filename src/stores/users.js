@@ -15,6 +15,7 @@ export const useUserStore = defineStore('user', {
           _id: 1, //should be linked with parcours store
           week: 1, //placeholder
           day: 1, //placeholder
+          exercice: 1, //placeholder
           timer: 60, //in seconds, linked to current exercice
         },
       },
@@ -64,6 +65,14 @@ export const useUserStore = defineStore('user', {
       if (this.currentUser) {
         //start the timer
         console.log('Training started')
+        const timer = setInterval(() => {
+          if (this.currentUser.parcours.timer > 0) {
+            this.currentUser.parcours.timer--
+          } else {
+            clearInterval(timer)
+            console.log('Exercice finished')
+      }
+        }, 1000)
       }
     },
     pauseTraining() {
@@ -76,6 +85,7 @@ export const useUserStore = defineStore('user', {
       if (this.currentUser) {
         //stop the timer
         console.log('Training stopped')
+        
       }
     }
     //End of training fuctions
