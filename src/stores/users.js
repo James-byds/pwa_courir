@@ -60,36 +60,25 @@ export const useUserStore = defineStore('user', {
         this.currentUser.parcours.timer = 60 //placeholder
       }
     },
-    //training
-    startTraining(timer, etape, program) {
-      console.log('Training started')
-      const running = setInterval(() => {
-        if (timer > 0) {
-          timer = timer - 15
-          console.log('Remaining time:', timer)
-        } else if (program[etape + 1]) {
-          console.log('Exercice finished: ' + program[etape].type)
-          etape++
-          timer = program[etape].duree * 60
+    //progress
+    progressTraining(program_length) {
+      if (this.currentUser) {
+        console.log('progressTraining')
+        if (this.currentUser.parcours.week < program_length) {
+          if (this.currentUser.parcours.day > 2) {
+            console.log('increment week')
+            this.currentUser.parcours.week++
+            this.currentUser.parcours.day = 1
+          } else {
+            console.log('increment day')
+            this.currentUser.parcours.day++
+          }
         } else {
-          etape++
-          console.log('Training finished')
-          clearInterval(running)
+          //user finished the training
         }
-      }, 1000)
-    },
-    pauseTraining() {
-      if (this.currentUser) {
-        //pause the timer
-        console.log('Training paused')
+        console.log(this.currentUser.parcours.day)
+        console.log(this.currentUser.parcours.week)
       }
     },
-    stopTraining() {
-      if (this.currentUser) {
-        //stop the timer
-        console.log('Training stopped')
-      }
-    },
-    //End of training fuctions
   },
 })
