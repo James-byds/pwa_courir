@@ -30,10 +30,6 @@ onBeforeMount(() => {
   </main>
   <main class="training" v-else>
     <h2>Training View</h2>
-    <pre>
-      Current User parcours data:
-      {{ currentParcours }}
-    </pre>
     <section v-if="currentUser">
       <h3>User Progression Data:</h3>
       <section class="training__program training__details">
@@ -58,9 +54,9 @@ onBeforeMount(() => {
       </section>
     </section>
     <section class="controls">
-      <button class="button is-success" @click.prevent="UserStore.startTraining()">
+      <router-link to="/running" :day="day" :week="week" class="button is-success">
         Start training session
-      </button>
+      </router-link>
       <!--start of reset controls-->
       <button class="button is-danger" @click.prevent="UserStore.resetParcours()">
         Reset Parcours
