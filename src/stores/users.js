@@ -59,5 +59,25 @@ export const useUserStore = defineStore('user', {
         this.currentUser.parcours.timer = 60 //placeholder
       }
     },
+    //training
+    startTraining() {
+      if (this.currentUser) {
+        //start the timer
+        console.log('Training started')
+      }
+    },
+    pauseTraining() {
+      if (this.currentUser) {
+        //pause the timer
+        console.log('Training paused')
+      }
+    },
+    stopTraining() {
+      if (this.currentUser) {
+        //stop the timer
+        console.log('Training stopped')
+      }
+    }
+    //End of training fuctions
   },
 })
