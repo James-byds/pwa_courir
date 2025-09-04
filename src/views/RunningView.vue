@@ -96,6 +96,7 @@ const pauseTraining = () => {
     console.log('Training paused')
     //stop wakelock
     unlockScreen()
+    pauseTracking()
   }
 }
 const stopTraining = () => {
@@ -109,6 +110,7 @@ const stopTraining = () => {
   timer.value = program.value[etape.value].duree * 60
   console.log('Training stopped')
   unlockScreen()
+  stopTracking()
 }
 //end of click handlers
 
@@ -177,6 +179,18 @@ const startTracking = () => {
     console.log('Geolocation is not supported by this browser.')
   }
 }
+const stopTracking = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.clearWatch()//stop tracking
+    positions.value = []
+  }
+}
+const pauseTracking = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.clearWatch()//stop tracking but only pause no reset
+  }
+}
+
 </script>
 
 <template>
