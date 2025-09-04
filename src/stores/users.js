@@ -57,22 +57,25 @@ export const useUserStore = defineStore('user', {
     resetParcours(parcoursId) {
       if (this.currentUser) {
         this.currentUser.parcours.week = 1
+        this.currentUser.parcours.day = 1
+        this.currentUser.parcours.exercice = 1
+        this.postRequest()
       }
     },
     resetWeek(parcoursId) {
       if (this.currentUser) {
         this.currentUser.parcours.day = 1
       }
+      this.postRequest()
     },
     resetDay(parcoursId) {
       if (this.currentUser) {
-        //need to fetch the base timer from parcours store
         //this.currentUser.parcours.timer = this.parcoursStore.currentParcours.timer
         this.currentUser.parcours.timer = 60 //placeholder
       }
     },
     //progress
-    async progressTraining(program_length) {
+    progressTraining(program_length) {
       //local update
       if (this.currentUser) {
         console.log('progressTraining')
@@ -86,40 +89,39 @@ export const useUserStore = defineStore('user', {
             this.currentUser.parcours.day++
           }
         } else {
-          //user finished the training
+          //user finished the training what do we do?
         }
         console.log(this.currentUser.parcours.day)
         console.log(this.currentUser.parcours.week)
         //api update
-        const sentData = {
-          data: {
-            _id: this.currentUser._id,
-            parcours: {
-              week: this.currentUser.parcours.week,
-              day: this.currentUser.parcours.day,
-              exercice: this.currentUser.parcours.exercice,
-              parcours_id: {
-                _id: this.currentUser.parcours.parcours_id._id,
-                _model: 'parcours',
-              },
-            },
-          },
-        }
-        const { data, error } = await useFetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(sentData),
-        })
-          .post()
-          .json()
-        if (!error.value) {
-          console.log(data.value)
-        } else {
-          console.error(error.value)
-        }
+        this.postRequest()
       }
     },
+    //Post general request for parcours update
+    async postRequest() {
+      const sentData = {
+        //detailled format to adapt to cockpit api methods
+        data: {
+          _id: this.currentUser._id,
+          parcours: this.currentUser.parcours,
+        },
+      }
+      const { data, error } = await useFetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          //Bearer token if needed
+        },
+        body: JSON.stringify(sentData),
+      })
+        .post()
+        .json()
+      if (!error.value) {
+        console.log(data.value)
+      } else {
+        console.error(error.value)
+      }
+    }
   },
 })
