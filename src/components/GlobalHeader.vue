@@ -6,7 +6,8 @@ import UserLogin from '@/components/sub_components/UserLogin.vue'
 <template>
   <header class="global-header">
     <section class="global-header__user">
-      <h1 class="global-header__user__title">My App</h1>
+      <!--h1 class="global-header__user__title">My App</!--h1-->
+      <img src="@/assets/img/logo.png" alt="logo" />
       <UserLogin />
     </section>
     <MainNav />
