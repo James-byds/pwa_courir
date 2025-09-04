@@ -44,7 +44,7 @@ export const useUserStore = defineStore('user', {
         .json()
       if (!error.value) {
         this.currentUser = data.value
-        console.log(this.currentUser)
+        console.log(this.currentUser.parcours.parcours_id._id)
       } else {
         console.error(error.value)
         return false

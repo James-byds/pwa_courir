@@ -24,20 +24,19 @@ onBeforeMount(() => {
 
 //fetch parcours
 onMounted(() => {
-  ParcoursStore.fetchParcours()
-  console.log('Parcours fetched')
   if (currentUser.value != null) {
-    ParcoursStore.selectParcours(currentUser.value.parcours._id) //should be linked to user parcours._id
+    console.log('finding parcours for user', currentUser.value.parcours.parcours_id._id)
+    ParcoursStore.selectParcours(currentUser.value.parcours.parcours_id._id) //should be linked to user parcours._id
   }
 })
 </script>
 
 <template>
   <GlobalHeader />
-  <main class="home" v-if="!currentUser">
+  <main class="home" v-if="!currentParcours">
     <h2>Please log in to access your training plan</h2>
   </main>
-  <main class="training" v-else >
+  <main class="training" v-else>
     <h2>Training View</h2>
     <section v-if="currentUser">
       <h3>User Progression Data:</h3>

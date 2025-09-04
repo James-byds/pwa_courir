@@ -3,12 +3,12 @@ import { defineStore } from 'pinia'
 import { useFetch } from '@vueuse/core'
 
 const apiUrl = 'http://127.0.0.1/api_courrir/api/content/items/parcours' //for later uses
+const apiUrlSolo = 'http://127.0.0.1/api_courrir/api/content/item/parcours' //for later uses
 
 export const useParcoursStore = defineStore('Parcours', {
   state: () => ({
     parcours: [
       {
-        _id: 0,
         name: 'Débutant 0-5 km',
         description:
           'Programme d’un total de 12 semaines destiné à amener un coureur débutant à parcourir 5 km sans s’arrêter, en alternant échauffement, marche, course lente et étirements.',
@@ -1662,7 +1662,6 @@ export const useParcoursStore = defineStore('Parcours', {
         ],
       },
       {
-        _id: 1,
         name: 'Intermédiaire 5-10 km',
         description:
           'Programme de 12 semaines pour poursuivre après le 0-5 km, optimisé pour les coureurs ayant une base sportive ou ayant fini le cycle précédent.',
@@ -1734,20 +1733,28 @@ export const useParcoursStore = defineStore('Parcours', {
     async fetchParcours() {
       const { data, error } = await useFetch(apiUrl).get().json()
       if (!error.value) {
-        console.log('parcours before ', this.parcours)
-        console.log('data details ', data.value)
         this.parcours = data.value
         console.log(this.parcours)
       } else {
         console.error(error.value)
       }
     },
-    selectParcours(id) {
-      const parcours = this.parcours.find((p) => p._id === id)
-      console.log('parcours selected', parcours)
-      if (parcours) {
-        this.currentParcours = parcours
+    async selectParcours(id) {
+      const { data, error } = await useFetch(apiUrlSolo + '/' + id, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .get()
+        .json()
+      if (!error.value) {
+        this.currentParcours = data.value
+        console.log('parcours selected', this.currentParcours)
         return true
+      } else {
+        console.error(error.value)
+        return false
       }
     },
   },
