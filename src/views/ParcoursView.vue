@@ -11,10 +11,6 @@ const UserStore = useUserStore()
 const currentUser = computed(() => UserStore.currentUser)
 const allParcours = computed(() => ParcoursStore.allParcours)
 
-const inscrire = (parcours, user) => {
-  console.log('Inscription request for parcours:', parcours)
-  console.log('Inscription request for user:', user)
-}
 
 //check if curentUser is defined
 onBeforeMount(() => {
@@ -42,7 +38,7 @@ onMounted(() => {
           <h2>{{ parcours.name }}</h2>
           <p>{{ parcours.description }}</p>
           <p>duree: {{ parcours.duree }}</p>
-          <button @click.prevent="inscrire(parcours._id, currentUser._id)">S'inscrire</button>
+          <button @click.prevent="UserStore.registerParcours(parcours._id)">S'inscrire</button>
         </li>
       </ol>
     </section>

@@ -6,19 +6,7 @@ const apiUrl = 'http://127.0.0.1/api_courrir/api/content/item/users' //for later
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    users: [
-      {
-        login: 'John',
-        name: 'John',
-        password: 'Doe',
-        parcours: {
-          week: 1, //placeholder
-          day: 1, //placeholder
-          exercice: 1, //placeholder
-          timer: 60, //in seconds, linked to current exercice
-        },
-      },
-    ],
+    users: [],
     currentUser: null,
   }),
   getters: {
@@ -48,23 +36,20 @@ export const useUserStore = defineStore('user', {
     },
     //AUTH
     async authenticate(login, password) {
-      console.log(login, password)
       //add filters
-      const { data, error } = await useFetch(apiUrl, {
+      const filters = `?filter={"login":"${encodeURIComponent(login)}","password":"${encodeURIComponent(password)}"}`
+      const { data, error } = await useFetch(apiUrl + filters, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        },
-        query: {
-          login: login,
-          password: password,
         },
       })
         .get()
         .json()
       if (!error.value) {
+        console.log('data value', data.value)
         this.currentUser = data.value
-        console.log(this.currentUser.parcours.parcours_id._id)
+        console.log('new user', this.currentUser)
       } else {
         console.error(error.value)
         return false
@@ -74,6 +59,19 @@ export const useUserStore = defineStore('user', {
       this.currentUser = null
       //redirect to home page
       window.location.href = '/'
+    },
+    //Register to a parcours
+    async registerParcours(parcoursId) {
+      this.currentUser.parcours = {
+        parcours_id: {
+          _id: parcoursId,
+          _model: 'parcours',
+        },
+        week: 1,
+        day: 1,
+        exercice: 1,
+      }
+      this.postRequest()
     },
     //ALL RESETS FUNCTIONS
     resetParcours(parcoursId) {
