@@ -2,6 +2,8 @@
 import { useParcoursStore } from '@/stores/parcours'
 import { useUserStore } from '@/stores/users'
 import { ref, computed, onBeforeMount, onMounted, defineProps } from 'vue'
+import { useWakeLock } from '@vueuse/core' //canceling screen sleep
+const wakeLock = useWakeLock() //storing the wake lock
 
 import GlobalHeader from '@/components/GlobalHeader.vue'
 
@@ -36,7 +38,16 @@ onMounted(() => {
 
 //clik handlers
 const startTraining = () => {
-  //resume
+  //resume and start wakelock
+  const lockScreen = async () => {
+    if (wakeLock.isSupported) {
+      await wakeLock.request('screen')
+      console.log('screen locked')
+    } else {
+      console.log('wake lock not supported')
+    }
+  }
+  lockScreen()
   if (state.value === 'paused' && !running.value) {
     state.value = 'running'
     running.value = setInterval(() => {
@@ -83,6 +94,8 @@ const pauseTraining = () => {
     running.value = null
     state.value = 'paused'
     console.log('Training paused')
+    //stop wakelock
+    unlockScreen()
   }
 }
 
@@ -96,6 +109,15 @@ const stopTraining = () => {
   etape.value = 0
   timer.value = program.value[etape.value].duree * 60
   console.log('Training stopped')
+  unlockScreen()
+}
+
+//stop wakelock
+const unlockScreen = async () => {
+  if (wakeLock.isSupported) {
+    await wakeLock.release()
+    console.log('screen unlocked')
+  }
 }
 </script>
 
