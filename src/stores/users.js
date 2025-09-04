@@ -39,6 +39,7 @@ export const useUserStore = defineStore('user', {
       //add filters
       const filters = `?filter={"login":"${encodeURIComponent(login)}","password":"${encodeURIComponent(password)}"}`
       const { data, error } = await useFetch(apiUrl + filters, {
+        //cockpit fait chier donc les filters sont dans l'url
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -51,7 +52,9 @@ export const useUserStore = defineStore('user', {
         this.currentUser = data.value
         console.log('new user', this.currentUser)
       } else {
+        //no user found
         console.error(error.value)
+        console.log('no user found')
         return false
       }
     },

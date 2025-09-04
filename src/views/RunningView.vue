@@ -1,7 +1,7 @@
 <script setup>
 import { useParcoursStore } from '@/stores/parcours'
 import { useUserStore } from '@/stores/users'
-import { ref, computed, onBeforeMount, onMounted, defineProps } from 'vue'
+import { ref, computed, onBeforeMount, onMounted, defineProps, watch } from 'vue'
 import { useWakeLock } from '@vueuse/core' //canceling screen sleep
 const wakeLock = useWakeLock() //storing the wake lock
 
@@ -17,7 +17,6 @@ const day = computed(() => currentUser.value?.parcours.day)
 const ParcoursStore = useParcoursStore()
 const currentParcours = computed(() => ParcoursStore.currentParcours)
 
-
 //local running values
 const etape = ref(0) //current step in the exercices
 const timer = ref(null) //timer reference for clearing it later
@@ -26,8 +25,8 @@ const running = ref(null)
 //init tracking values
 const distanceTotal = ref(0)
 const positions = ref([])
+const watchId = ref(null)
 const steps = ref(0)
-
 
 onBeforeMount(() => {})
 //recover parcours structure and program for the day
@@ -46,7 +45,7 @@ onMounted(() => {
 
 //clik handlers
 const startTraining = () => {
-  lockScreen()//smartphone screen lock
+  lockScreen() //smartphone screen lock
   if (state.value === 'paused' && !running.value) {
     state.value = 'running'
     running.value = setInterval(() => {
@@ -64,7 +63,7 @@ const startTraining = () => {
     console.log('Training resumed')
   } else if (state.value === 'idle' && !running.value) {
     // fresh start
-    startTracking()//tracking distance
+    startTracking() //tracking distance
     etape.value = 0
     timer.value = program.value[etape.value].duree * 60
     state.value = 'running'
@@ -131,8 +130,11 @@ const unlockScreen = async () => {
   }
 }
 
-//tracking functions 
-const getDistance = (pos1, pos2) => {//get distance in meters between two positions
+//tracking functions
+const getDistance = (pos1, pos2) => {
+  console.log('pos1 ', pos1)
+  console.log('pos2 ', pos2)
+  //get distance in meters between two positions
   const Radius = 6371 // Radius of the earth in km
   const dLat = deg2rad(pos2.latitude - pos1.latitude) // deg2rad below
   const dLon = deg2rad(pos2.longitude - pos1.longitude)
@@ -143,26 +145,30 @@ const getDistance = (pos1, pos2) => {//get distance in meters between two positi
       Math.sin(dLon / 2) *
       Math.sin(dLon / 2)
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) // Distance in rad
-  const distance = (Radius * c)*1000 // Distance in km *1000 to get meters
+  const distance = Radius * c * 1000 // Distance in km *1000 to get meters
   return distance
 }
 
-const deg2rad = (deg) => { // convert degrees to radians
+const deg2rad = (deg) => {
+  // convert degrees to radians
   return deg * (Math.PI / 180)
 }
 
 const startTracking = () => {
   if (navigator.geolocation) {
-    navigator.geolocation.watchPosition(
+    watchId.value = navigator.geolocation.watchPosition(
       (position) => {
         // console.log(position.coords.latitude, position.coords.longitude)
         const newPos = {
           latitude: position.coords.latitude,
-          longitude: position.coords.longitude, 
+          longitude: position.coords.longitude,
         }
         if (positions.value.length > 0) {
           const lastPos = positions.value[positions.value.length - 1]
+          console.log(lastPos)
           distanceTotal.value = distanceTotal.value + getDistance(newPos, lastPos)
+          //round to 2 decimals
+          distanceTotal.value = parseFloat(distanceTotal.value.toFixed(2))
         }
         positions.value.push(newPos)
       },
@@ -174,23 +180,22 @@ const startTracking = () => {
         maximumAge: 1000, // 10 seconds
       },
     )
-  }
-  else {
+  } else {
     console.log('Geolocation is not supported by this browser.')
   }
 }
 const stopTracking = () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.clearWatch()//stop tracking
+  if (navigator.geolocation && watchId.value != null) {
+    navigator.geolocation.clearWatch(watchId.value) //stop tracking
+    watchId.value = null
     positions.value = []
   }
 }
 const pauseTracking = () => {
   if (navigator.geolocation) {
-    navigator.geolocation.clearWatch()//stop tracking but only pause no reset
+    navigator.geolocation.clearWatch(watchId.value) //stop tracking but only pause no reset
   }
 }
-
 </script>
 
 <template>
@@ -222,6 +227,7 @@ const pauseTracking = () => {
           {{ program[etape + 1].type }} - {{ program[etape + 1].duree }} min
         </p>
         <p v-else>Go get it!</p>
+        <p>{{ distanceTotal }} m</p>
       </div>
     </section>
     <section class="controls">
