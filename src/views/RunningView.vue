@@ -13,14 +13,22 @@ const UserStore = useUserStore()
 const currentUser = computed(() => UserStore.currentUser)
 const week = computed(() => currentUser.value?.parcours.week)
 const day = computed(() => currentUser.value?.parcours.day)
-
+//parcours store
 const ParcoursStore = useParcoursStore()
 const currentParcours = computed(() => ParcoursStore.currentParcours)
 
+
+//local running values
 const etape = ref(0) //current step in the exercices
 const timer = ref(null) //timer reference for clearing it later
 const state = ref('idle') //idle, running, paused
 const running = ref(null)
+//init tracking values
+const distanceTotal = ref(0)
+const positions = ref([])
+const steps = ref(0)
+
+
 onBeforeMount(() => {})
 //recover parcours structure and program for the day
 if (currentUser.value != null) {
@@ -38,16 +46,7 @@ onMounted(() => {
 
 //clik handlers
 const startTraining = () => {
-  //resume and start wakelock
-  const lockScreen = async () => {
-    if (wakeLock.isSupported) {
-      await wakeLock.request('screen')
-      console.log('screen locked')
-    } else {
-      console.log('wake lock not supported')
-    }
-  }
-  lockScreen()
+  lockScreen()//smartphone screen lock
   if (state.value === 'paused' && !running.value) {
     state.value = 'running'
     running.value = setInterval(() => {
@@ -65,6 +64,7 @@ const startTraining = () => {
     console.log('Training resumed')
   } else if (state.value === 'idle' && !running.value) {
     // fresh start
+    startTracking()//tracking distance
     etape.value = 0
     timer.value = program.value[etape.value].duree * 60
     state.value = 'running'
@@ -98,7 +98,6 @@ const pauseTraining = () => {
     unlockScreen()
   }
 }
-
 const stopTraining = () => {
   if (running.value) {
     clearInterval(running.value)
@@ -111,12 +110,71 @@ const stopTraining = () => {
   console.log('Training stopped')
   unlockScreen()
 }
+//end of click handlers
 
+//resume and start wakelock
+const lockScreen = async () => {
+  if (wakeLock.isSupported) {
+    await wakeLock.request('screen')
+    console.log('screen locked')
+  } else {
+    console.log('wake lock not supported')
+  }
+}
 //stop wakelock
 const unlockScreen = async () => {
   if (wakeLock.isSupported) {
     await wakeLock.release()
     console.log('screen unlocked')
+  }
+}
+
+//tracking functions 
+const getDistance = (pos1, pos2) => {//get distance in meters between two positions
+  const Radius = 6371 // Radius of the earth in km
+  const dLat = deg2rad(pos2.latitude - pos1.latitude) // deg2rad below
+  const dLon = deg2rad(pos2.longitude - pos1.longitude)
+  const a = //a is the Haversine formula
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(pos1.latitude)) *
+      Math.cos(deg2rad(pos2.latitude)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2)
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) // Distance in rad
+  const distance = (Radius * c)*1000 // Distance in km *1000 to get meters
+  return distance
+}
+
+const deg2rad = (deg) => { // convert degrees to radians
+  return deg * (Math.PI / 180)
+}
+
+const startTracking = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(
+      (position) => {
+        // console.log(position.coords.latitude, position.coords.longitude)
+        const newPos = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude, 
+        }
+        if (positions.value.length > 0) {
+          const lastPos = positions.value[positions.value.length - 1]
+          distanceTotal.value = distanceTotal.value + getDistance(newPos, lastPos)
+        }
+        positions.value.push(newPos)
+      },
+      (err) => {
+        console.log(err)
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 1000, // 10 seconds
+      },
+    )
+  }
+  else {
+    console.log('Geolocation is not supported by this browser.')
   }
 }
 </script>
