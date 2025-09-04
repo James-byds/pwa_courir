@@ -1,7 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { useFetch } from '@vueuse/core'
 
-const apiUrl = 'https://jsonplaceholder.typicode.com/users' //for later uses
+const apiUrl = 'http://127.0.0.1/api_courrir/api/content/item/users' //for later uses
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -26,16 +27,28 @@ export const useUserStore = defineStore('user', {
     allUsers: (state) => state.users,
   },
   actions: {
-    authenticate(login, password) {
+    async authenticate(login, password) {
       console.log(login, password)
-      const user = this.users.find((u) => u.login === login && u.password === password)
-      console.log(user)
-      if (user) {
-        this.currentUser = user
+      //add filters
+      const { data, error } = await useFetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        query: {
+          login: login,
+          password: password,
+        },
+      })
+        .get()
+        .json()
+      if (!error.value) {
+        this.currentUser = data.value
         console.log(this.currentUser)
-        return true
+      } else {
+        console.error(error.value)
+        return false
       }
-      return false
     },
     logout() {
       this.currentUser = null

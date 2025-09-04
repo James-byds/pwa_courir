@@ -22,6 +22,12 @@ onBeforeMount(() => {
     window.location.href = '/'
   }
 })
+
+//fetch parcours
+onMounted(() => {
+  ParcoursStore.fetchParcours()
+  console.log('Parcours fetched')
+})
 </script>
 
 <template>

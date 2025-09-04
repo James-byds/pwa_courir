@@ -1,7 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { useFetch } from '@vueuse/core'
 
-const apiUrl = 'https://jsonplaceholder.typicode.com/Parcourss' //for later uses
+const apiUrl = 'http://127.0.0.1/api_courrir/api/content/items/parcours' //for later uses
 
 export const useParcoursStore = defineStore('Parcours', {
   state: () => ({
@@ -1730,8 +1731,20 @@ export const useParcoursStore = defineStore('Parcours', {
     allParcours: (state) => state.parcours,
   },
   actions: {
+    async fetchParcours() {
+      const { data, error } = await useFetch(apiUrl).get().json()
+      if (!error.value) {
+        console.log('parcours before ', this.parcours)
+        console.log('data details ', data.value)
+        this.parcours = data.value
+        console.log(this.parcours)
+      } else {
+        console.error(error.value)
+      }
+    },
     selectParcours(id) {
       const parcours = this.parcours.find((p) => p._id === id)
+      console.log('parcours selected', parcours)
       if (parcours) {
         this.currentParcours = parcours
         return true

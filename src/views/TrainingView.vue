@@ -17,8 +17,17 @@ const ParcoursStore = useParcoursStore()
 const currentParcours = computed(() => ParcoursStore.currentParcours)
 
 onBeforeMount(() => {
+  if (!currentUser.value) {
+    window.location.href = '/'
+  }
+})
+
+//fetch parcours
+onMounted(() => {
+  ParcoursStore.fetchParcours()
+  console.log('Parcours fetched')
   if (currentUser.value != null) {
-    ParcoursStore.selectParcours(currentUser.value.parcours._id - 1) //should be linked to user parcours._id
+    ParcoursStore.selectParcours(currentUser.value.parcours._id) //should be linked to user parcours._id
   }
 })
 </script>
@@ -28,7 +37,7 @@ onBeforeMount(() => {
   <main class="home" v-if="!currentUser">
     <h2>Please log in to access your training plan</h2>
   </main>
-  <main class="training" v-else>
+  <main class="training" v-else >
     <h2>Training View</h2>
     <section v-if="currentUser">
       <h3>User Progression Data:</h3>
