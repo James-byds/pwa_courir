@@ -25,6 +25,28 @@ export const useUserStore = defineStore('user', {
     allUsers: (state) => state.users,
   },
   actions: {
+    //New User
+    async addUser(user) {
+      console.log(user)
+      const { data, error } = await useFetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(user),
+      })
+        .post()
+        .json()
+      if (!error.value) {
+        console.log(data.value)
+        this.users.push(data.value)
+        this.currentUser = data.value
+      } else {
+        console.error(error.value)
+      }
+    },
+    //AUTH
     async authenticate(login, password) {
       console.log(login, password)
       //add filters
@@ -110,7 +132,7 @@ export const useUserStore = defineStore('user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          Accept: 'application/json',
           //Bearer token if needed
         },
         body: JSON.stringify(sentData),
@@ -122,6 +144,6 @@ export const useUserStore = defineStore('user', {
       } else {
         console.error(error.value)
       }
-    }
+    },
   },
 })

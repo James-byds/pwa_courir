@@ -8,12 +8,15 @@ const currentUser = computed(() => UserStore.currentUser)
 
 const router = useRouter()
 const currentRoute = computed(() => router.currentRoute.value)
+const filteredRoutes = computed(() =>
+  router.getRoutes().filter((route) => route.name !== 'Running'),
+)
 </script>
 
 <template>
   <nav class="main-nav" v-if="currentUser">
     <router-link
-      v-for="route in router.getRoutes()"
+      v-for="route in filteredRoutes"
       :key="route.name"
       :to="route.path"
       class="main-nav__links"
