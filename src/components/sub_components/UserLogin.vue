@@ -15,20 +15,24 @@ const password = ref('')
     <button @click="UserStore.logout()" class="button is-danger">Log Out</button>
   </section>
   <section class="user-login" v-else>
-    <span class="user-login__label">Please log in to access more features.</span>
-    <input
-      type="text"
-      placeholder="Login"
-      name="login"
-      class="input user-login__input"
-      v-model.lazy.trim="login"
-    />
-    <input
-      type="password"
-      placeholder="Password"
-      class="input user-login__input"
-      v-model.lazy.trim="password"
-    />
+    <formfield class="user-login__label">
+      Log In
+      <input
+        type="text"
+        placeholder="Login"
+        name="login"
+        class="input user-login__input"
+        v-model.lazy.trim="login"
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        class="input user-login__input"
+        v-model.lazy.trim="password"
+        required
+      />
+    </formfield>
     <button
       class="button is-primary user-login__input"
       @click.prevent="UserStore.authenticate(login, password)"
@@ -41,10 +45,12 @@ const password = ref('')
 <style lang="scss" scoped>
 .user-login {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: self-end;
+  justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
+  padding: 1.5rem;
+  border-inline-start: 2px solid var(--border-color);
   &__label {
     display: block;
     color: var(--color-text);
