@@ -8,12 +8,10 @@ export const useUserStore = defineStore('user', {
   state: () => ({
     users: [
       {
-        _id: '1',
         login: 'John',
         name: 'John',
         password: 'Doe',
         parcours: {
-          _id: 1, //should be linked with parcours store
           week: 1, //placeholder
           day: 1, //placeholder
           exercice: 1, //placeholder
@@ -74,7 +72,8 @@ export const useUserStore = defineStore('user', {
       }
     },
     //progress
-    progressTraining(program_length) {
+    async progressTraining(program_length) {
+      //local update
       if (this.currentUser) {
         console.log('progressTraining')
         if (this.currentUser.parcours.week < program_length) {
@@ -91,6 +90,35 @@ export const useUserStore = defineStore('user', {
         }
         console.log(this.currentUser.parcours.day)
         console.log(this.currentUser.parcours.week)
+        //api update
+        const sentData = {
+          data: {
+            _id: this.currentUser._id,
+            parcours: {
+              week: this.currentUser.parcours.week,
+              day: this.currentUser.parcours.day,
+              exercice: this.currentUser.parcours.exercice,
+              parcours_id: {
+                _id: this.currentUser.parcours.parcours_id._id,
+                _model: 'parcours',
+              },
+            },
+          },
+        }
+        const { data, error } = await useFetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(sentData),
+        })
+          .post()
+          .json()
+        if (!error.value) {
+          console.log(data.value)
+        } else {
+          console.error(error.value)
+        }
       }
     },
   },

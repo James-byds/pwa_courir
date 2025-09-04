@@ -22,7 +22,7 @@ const running = ref(null)
 onBeforeMount(() => {})
 //recover parcours structure and program for the day
 if (currentUser.value != null) {
-  ParcoursStore.selectParcours(currentUser.value.parcours._id - 1) //should be linked to user parcours._id
+  ParcoursStore.selectParcours(currentUser.value.parcours.parcours_id._id) //should be linked to user parcours._id//should be linked to user parcours._id
 }
 const program = computed(
   () => currentParcours.value.semaines[week.value - 1].jours[day.value - 1].exercices,
