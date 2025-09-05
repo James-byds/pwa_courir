@@ -28,13 +28,15 @@ const filteredRoutes = computed(() =>
 
 <style scoped lang="scss">
 .main-nav {
-  background-color: #333;
+  background-color: var(--primary-color);
   padding: 1rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
+  border: 1px solid var(--border-color);
   &__links {
+    background-color: var(--secondary-color);
     gap: 1rem;
     list-style: none;
     color: var(--color-text);

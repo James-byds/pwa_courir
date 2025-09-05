@@ -34,46 +34,47 @@ onMounted(() => {
 <template>
   <GlobalHeader />
   <main class="home" v-if="!currentParcours">
-    <h2>Please log in to access your training plan</h2>
+    <h2>Veuillez vous connecter et choisir un programme pour avoir acces à l'application</h2>
   </main>
   <main class="training" v-else>
-    <h2>Training View</h2>
+    <h2>Votre programme d'entrainement</h2>
     <section v-if="currentUser">
-      <h3>User Progression Data:</h3>
+      <h3>Votre progression:</h3>
       <section class="training__program training__details">
-        <p>Current User: {{ currentUser.login }}</p>
-        <p>Current Parcours ID: {{ currentUser.parcours._id }}</p>
-        <p>Parcours Name: {{ currentParcours.name }}</p>
+        <p>Utilisateur: {{ currentUser.login }}</p>
+        <p>Nom du parcours: {{ currentParcours.name }}</p>
       </section>
       <section class="training__state training__details">
-        <p>Current Week: {{ week }}</p>
-        <p>Current Day: {{ day }}</p>
+        <p>Semaine en cours: {{ week }}</p>
+        <p>Prochain jour: {{ day }}</p>
       </section>
       <section class="training__state training__details">
         <p v-if="week > 1 && day > 1">Previous Exercice:</p>
         <p>
-          Current Exercice:
-          {{ currentParcours.semaines[week - 1].jours[day - 1].exercices[0].type }}
+          Premier exercicde de la séance:
+          {{ currentParcours.semaines[week - 1].jours[day - 1].exercices[1].type }}
         </p>
         <p>
-          Estimated time for next exercice:
+          Durée totale de la prochaine séance:
           {{ currentParcours.semaines[week - 1].jours[day - 1].tot_duree }} min
         </p>
       </section>
     </section>
     <section class="controls">
       <router-link to="/running" :day="day" :week="week" class="button is-success">
-        Start training session
+        On y va !
       </router-link>
       <!--start of reset controls-->
       <button class="button is-danger" @click.prevent="UserStore.resetParcours()">
-        Reset Parcours
+        Recommencer le parcours
       </button>
-      <button class="button is-danger" @click.prevent="UserStore.resetWeek()">Restart Week</button>
-      <button class="button is-danger" @click.prevent="UserStore.resetDay()">Reset Day</button>
+      <button class="button is-danger" @click.prevent="UserStore.resetWeek()">Redémarrer la semaine</button>
+      <button class="button is-danger" @click.prevent="UserStore.resetDay()">Redémarrer le jour</button>
     </section>
   </main>
-  <router-link to="/">Go back to Home</router-link>
+  <router-link to="/" class="button">
+    <font-awesome-icon icon="arrow-left" /> Retour à l'accueil
+  </router-link>
 </template>
 
 <style scoped lang="scss">

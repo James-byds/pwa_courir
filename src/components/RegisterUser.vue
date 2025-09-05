@@ -20,32 +20,32 @@ const newUser = ref({
 
 <template>
   <div class="register-user">
-    <h2>Register User</h2>
+    <h2>Inscription</h2>
     <form class="register-user__form">
-      <input class="input" required type="text" v-model.lazy.trim="login" placeholder="Login" />
+      <input class="input is-rounded" required type="text" v-model.lazy.trim="login" placeholder="Nom d'utilisateur" />
       <input
-        class="input"
+        class="input is-rounded"
         required
         type="password"
         v-model.lazy.trim="password"
-        placeholder="Password"
+        placeholder="Mot de passe"
       />
       <input
-        class="input"
+        class="input is-rounded"
         required
         type="firstname"
         v-model.lazy.trim="firstname"
-        placeholder="First Name"
+        placeholder="Prénom"
       />
       <input
-        class="input"
+        class="input is-rounded"
         required
         type="lastname"
         v-model.lazy.trim="lastname"
-        placeholder="Last Name"
+        placeholder="Nom"
       />
       <button type="submit" class="button is-info" @click.prevent="UserStore.addUser(newUser)">
-        Register
+        Inscription
       </button>
     </form>
   </div>

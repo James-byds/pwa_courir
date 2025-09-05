@@ -17,11 +17,12 @@ const day = computed(() => currentUser.value?.parcours.day)
 const ParcoursStore = useParcoursStore()
 const currentParcours = computed(() => ParcoursStore.currentParcours)
 
-//local running values
+//local course values
 const etape = ref(0) //current step in the exercices
 const timer = ref(null) //timer reference for clearing it later
-const state = ref('idle') //idle, running, paused
-const running = ref(null)
+const rawTimer = ref(null) //timer reference for clearing it later
+const state = ref('au repos') //au repos, course, pause
+const course = ref(null)
 //init tracking values
 const distanceTotal = ref(0)
 const positions = ref([])
@@ -40,74 +41,85 @@ const program = computed(
 
 onMounted(() => {
   //start the timer
-  timer.value = program.value[etape.value].duree * 60
+  rawTimer.value = program.value[etape.value].duree * 60
+  //convert to mm:ss
+  convertTimer(rawTimer)
 })
+
+const convertTimer = (rawTimer) => {
+  const minutes = Math.floor(rawTimer.value / 60)
+  const seconds = rawTimer.value % 60
+  timer.value = `${minutes<10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+}
 
 //clik handlers
 const startTraining = () => {
   lockScreen() //smartphone screen lock
-  if (state.value === 'paused' && !running.value) {
-    state.value = 'running'
-    running.value = setInterval(() => {
-      if (timer.value > 0 && state.value === 'running') {
-        timer.value = timer.value - 15
+  if (state.value === 'pause' && !course.value) {
+    state.value = 'course'
+    course.value = setInterval(() => {
+      if (rawTimer.value > 0 && state.value === 'course') {
+        rawTimer.value = rawTimer.value - 30
       } else if (program.value[etape.value + 1]) {
         etape.value++
-        timer.value = program.value[etape.value].duree * 60
+        rawTimer.value = program.value[etape.value].duree * 60
       } else {
-        clearInterval(running.value)
-        running.value = null
-        state.value = 'idle'
+        clearInterval(course.value)
+        course.value = null
+        state.value = 'au repos'
       }
+      convertTimer(rawTimer)
     }, 1000)
     console.log('Training resumed')
-  } else if (state.value === 'idle' && !running.value) {
+  } else if (state.value === 'au repos' && !course.value) {
     // fresh start
     startTracking() //tracking distance
     etape.value = 0
-    timer.value = program.value[etape.value].duree * 60
-    state.value = 'running'
-    running.value = setInterval(() => {
-      if (timer.value > 0 && state.value === 'running') {
-        timer.value = timer.value - 30
+    rawTimer.value = program.value[etape.value].duree * 60
+    state.value = 'course'
+    course.value = setInterval(() => {
+      if (rawTimer.value > 0 && state.value === 'course') {
+        rawTimer.value = rawTimer.value - 30
       } else if (program.value[etape.value + 1]) {
         etape.value++
-        timer.value = program.value[etape.value].duree * 60
+        rawTimer.value = program.value[etape.value].duree * 60
       } else {
-        clearInterval(running.value)
-        running.value = null
-        state.value = 'idle'
+        clearInterval(course.value)
+        course.value = null
+        state.value = 'au repos'
         console.log('Training finished')
         //progress the user
         UserStore.progressTraining(currentParcours.value.semaines.length)
         etape.value = 0
       }
+      convertTimer(rawTimer)
     }, 1000)
     console.log('Training started')
   }
 }
 
 const pauseTraining = () => {
-  if (running.value) {
-    clearInterval(running.value)
-    running.value = null
-    state.value = 'paused'
-    console.log('Training paused')
+  if (course.value) {
+    clearInterval(course.value)
+    course.value = null
+    state.value = 'pause'
+    console.log('Training pause')
     //stop wakelock
     unlockScreen()
     pauseTracking()
   }
 }
 const stopTraining = () => {
-  if (running.value) {
-    clearInterval(running.value)
-    running.value = null
+  if (course.value) {
+    clearInterval(course.value)
+    course.value = null
   }
   //resets values
-  state.value = 'idle'
+  state.value = 'au repos'
   etape.value = 0
-  timer.value = program.value[etape.value].duree * 60
+  rawTimer.value = program.value[etape.value].duree * 60
   console.log('Training stopped')
+  convertTimer(rawTimer)
   unlockScreen()
   stopTracking()
 }
@@ -199,44 +211,103 @@ const pauseTracking = () => {
 </script>
 
 <template>
-  <GlobalHeader />
-  <main class="running">
-    <h1>Running View</h1>
-    <p>This is the Running page of the application.</p>
-    <p v-show="!currentUser">Please log in to access more features.</p>
-    <p v-if="currentUser">Current User: {{ currentUser.login }}</p>
-    <p v-if="currentUser">Current Parcours ID: {{ currentUser.parcours._id }}</p>
-    <p v-if="currentUser">Parcours Name: {{ currentParcours.name }}</p>
+  <main class="course">
+    <h1>Cours hein gamin</h1>
+    <p v-show="!currentUser">Veuillez vous connnecter</p>
+    <p v-if="currentUser">Courreur: {{ currentUser.login }}</p>
+    <p v-if="currentUser">Nom du parcours: {{ currentParcours.name }}</p>
     {{ day.value }}
-    <section class="running__dashboard">
-      <div class="running__dashboard__state">
-        <p>{{ etape + 1 }}/{{ program.length }}</p>
-        <p>{{ state }}</p>
-      </div>
-      <div class="running__dashboard__step">
-        Current Exercice:
+    <p>etat de l'entrainement: {{ state }}</p>
+    <section class="course__dashboard">
+      <div class="course__dashboard__step">
         <p>{{ program[etape].type }}</p>
       </div>
-      <div class="running__dashboard__timer">
-        <p>{{ timer }} sec</p>
+      <div class="course__dashboard__timer">
+        <p>{{ timer }} </p>
       </div>
-      <p>Semaine {{ week }}/ Jour {{ day }}</p>
-      <div class="running__dashboard__next">
+      <div class="course__dashboard__state">
+        <p>Etape {{ etape + 1 }}/{{ program.length }}</p>
+        <progress class="progress is-success" :value="etape + 1" :max="program.length"></progress>
+        <p>Semaine {{ week }}/ Jour {{ day }}</p>
+      </div>
+      <div class="course__dashboard__next">
         <p v-if="etape < program.length - 1">
-          next exercice:
+          Prochaine étape:
           {{ program[etape + 1].type }} - {{ program[etape + 1].duree }} min
         </p>
-        <p v-else>Go get it!</p>
-        <p>{{ distanceTotal }} m</p>
+        <p v-else>Allez y c'est la fin!</p>
+        <p>Distance parcourue : {{ distanceTotal }} m</p>
       </div>
     </section>
     <section class="controls">
       <button class="button is-success" @click.prevent="startTraining()">
-        <p v-if="state === 'paused'">Resume</p>
-        <p v-else>Start</p>
+        <p v-if="state === 'pause'">Reprendre</p>
+        <p v-else>Commencer</p>
       </button>
-      <button class="button is-danger" @click.prevent="stopTraining()">Stop</button>
-      <button class="button is-warning" @click.prevent="pauseTraining()">Pause</button>
+      <button class="button is-warning" @click.prevent="pauseTraining()"><p>Pause</p></button>
+      <button class="button is-danger" @click.prevent="stopTraining()"><p>Stop</p></button>
     </section>
   </main>
+  <router-link to="/" class="button">
+    <font-awesome-icon icon="arrow-left" /> Retour à l'accueil
+  </router-link>
 </template>
+
+<style lang="scss" scoped>
+.course {
+  max-width: 800px;
+  min-width: 420px;
+  margin: 0 auto;
+  &__dashboard {
+    background-color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
+    justify-content: space-around;
+    margin: 1rem;
+    & div {
+      width: 40%;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+    &__step {
+      font-size: var(--font-size-lg);
+      text-transform: capitalize;
+    }
+    &__timer {
+      font-size: var(--font-size-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    &__state {
+      
+    }
+    &__next {
+      
+    }
+  }
+}
+
+.controls {
+  margin-top: 1rem;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0 auto;
+  & * {
+    flex-grow: 1; 
+    flex-basis: 1;
+    width: 95%;
+    padding-block: 0.5rem;
+  }
+}
+
+</style>

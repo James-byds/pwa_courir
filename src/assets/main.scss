@@ -16,10 +16,17 @@
   --info-color: #2196f3;
   --border-color: #88ba16;
   --shadow-color: rgba(0, 0, 0, 0.1);
-  --color-text: white;
+  --color-text: #333;
   --font-size-base: 1.2rem;
   --font-size-xl: 2rem;
   --font-size-lg: 1.5rem;
   --font-size-sm: 1rem;
   --transition-speed: 0.3s;
+}
+
+.title {
+  font-size: var(--font-size-lg);
+  margin: 1rem;
+  padding-block-end: 0.5rem ;
+  border-bottom: 2px solid var(--border-color);
 }

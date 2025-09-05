@@ -12,7 +12,7 @@ const password = ref('')
 <template>
   <section class="user-login" v-if="currentUser">
     <span class="user-login__label">Bonjour {{ currentUser.login }}</span>
-    <button @click="UserStore.logout()" class="button is-danger">
+    <button @click="UserStore.logout()" class="button is-danger is-rounded">
       Déconnexion <font-awesome-icon :icon="['fas', 'sign-out-alt']" />
     </button>
   </section>
@@ -23,7 +23,7 @@ const password = ref('')
       type="text"
       placeholder="Nom d'utilisateur"
       name="login"
-      class="input user-login__input"
+      class="input is-rounded user-login__input"
       v-model.lazy.trim="login"
       required
       />
@@ -31,13 +31,13 @@ const password = ref('')
       <input
         type="password"
         placeholder="Mot de passe"
-        class="input user-login__input"
+        class="input is-rounded user-login__input"
         v-model.lazy.trim="password"
         required
       />
     </fieldset>
     <button
-      class="button is-primary user-login__input"
+      class="button is-primary user-login__input is-rounded"
       @click.prevent="UserStore.authenticate(login, password)"
     >
       <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Connexion
@@ -54,8 +54,8 @@ const password = ref('')
   flex-flow: row wrap;
   padding: 1.5rem;
   border-inline-start: 2px solid var(--border-color);
+  background-color: var(--primary-color);
   &__label {
-    color: var(--color-text);
     flex: 1;
   }
   &__input {

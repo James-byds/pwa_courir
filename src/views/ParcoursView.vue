@@ -31,14 +31,15 @@ onMounted(() => {
 <template>
   <GlobalHeader />
   <main class="parcours">
-    <h1>Parcours View</h1>
-    <p>This is the Parcours page of the application.</p>
+    <h1 class="title">Listes des programmes d'entrainement</h1>
+    <p>Retrouvez les programmes d'entrainement disponibles</p>
+    <p>Une fois inscrits, vous pourrez suivre votre progression</p>
     <section v-if="allParcours">
       <ol class="parcours__list">
-        <li v-for="parcours in allParcours" :key="parcours.id" class="parcours__list__item">
+        <li v-for="parcours in allParcours" :key="parcours.id" class="parcours__list__item card">
           <!--INFOS GENERALES DU PARCOURS-->
           <h2 class="parcours__list__item__name">{{ parcours.name }}</h2>
-          <div class="parcours__list__item__infos">
+          <div class="parcours__list__item__infos card-content">
             <p>{{ parcours.description }}</p>
             <p>Durée: {{ parcours.duree }}</p>
           </div>
