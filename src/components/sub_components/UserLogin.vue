@@ -15,7 +15,13 @@ const password = ref('')
     <button @click="UserStore.logout()" class="button is-danger">Log Out</button>
   </section>
   <section class="user-login" v-else>
-    <formfield class="user-login__label">
+    <span class="icon is-small is-left">
+      <font-awesome-icon :icon="['fas', 'user']" />
+    </span>
+    <span class="icon is-small is-left">
+      <font-awesome-icon :icon="['fas', 'unlock']" />
+    </span>
+    <fieldset class="user-login__label">
       Log In
       <input
         type="text"
@@ -32,7 +38,7 @@ const password = ref('')
         v-model.lazy.trim="password"
         required
       />
-    </formfield>
+    </fieldset>
     <button
       class="button is-primary user-login__input"
       @click.prevent="UserStore.authenticate(login, password)"
