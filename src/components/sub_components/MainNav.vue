@@ -50,19 +50,13 @@ const toggleMenu = () => {
     </div>
   </div>
 </nav>
-  <!--nav class="main-nav" v-if="currentUser">
-    <router-link
-      v-for="route in filteredRoutes"
-      :key="route.name"
-      :to="route.path"
-      class="main-nav__links"
-      :class="{ 'main-nav__links--active': route.path === currentRoute.path }"
-      >{{ route.name }}</router-link
-    >
-  </!--nav-->
 </template>
 
 <style scoped lang="scss">
+.navbar-menu {
+  background-color: unset;//unset bulma style
+}
+
 .main-nav {
   background-color: var(--primary-color);
   padding: 1rem;

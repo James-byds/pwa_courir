@@ -51,7 +51,7 @@ const password = ref('')
   align-items: self-end;
   justify-content: center;
   gap: 1rem;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   padding: 1.5rem;
   border-inline-start: 2px solid var(--border-color);
   background-color: var(--primary-color);

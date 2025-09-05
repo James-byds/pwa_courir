@@ -102,6 +102,12 @@ export const useUserStore = defineStore('user', {
         this.currentUser.parcours.timer = 60 //placeholder
       }
     },
+    deleteParcours() {
+      if (this.currentUser) {
+        this.currentUser.parcours = null
+        this.postRequest()
+      }
+    },
     //progress
     progressTraining(program_length) {
       //local update

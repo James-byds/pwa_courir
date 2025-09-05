@@ -37,24 +37,29 @@ onMounted(() => {
     <h2>Veuillez vous connecter et choisir un programme pour avoir acces à l'application</h2>
   </main>
   <main class="training" v-else>
-    <h2>Votre programme d'entrainement</h2>
+    <h2 class="title">Votre programme d'entrainement</h2>
     <section v-if="currentUser">
       <h3>Votre progression:</h3>
       <section class="training__program training__details">
-        <p>Utilisateur: {{ currentUser.login }}</p>
-        <p>Nom du parcours: {{ currentParcours.name }}</p>
+        <p class="training__details__data">Utilisateur: {{ currentUser.login }}</p>
+        <p class="training__details__data">Nom du parcours: {{ currentParcours.name }}</p>
       </section>
       <section class="training__state training__details">
-        <p>Semaine en cours: {{ week }}</p>
-        <p>Prochain jour: {{ day }}</p>
+        <p class="training__details__data">Semaine en cours: {{ week }}</p>
+        <p class="training__details__data">Prochain jour: {{ day }}</p>
+        <p class="training__details__data">
+          Votre progression de la semaine {{ currentUser.parcours.week }}:
+              <progress class="progress is-small is-info"
+                :value="currentUser.parcours.day-1" max="3"></progress>
+        </p>
       </section>
       <section class="training__state training__details">
         <p v-if="week > 1 && day > 1">Previous Exercice:</p>
-        <p>
+        <p class="training__details__data">
           Premier exercicde de la séance:
           {{ currentParcours.semaines[week - 1].jours[day - 1].exercices[1].type }}
         </p>
-        <p>
+        <p class="training__details__data">
           Durée totale de la prochaine séance:
           {{ currentParcours.semaines[week - 1].jours[day - 1].tot_duree }} min
         </p>
@@ -81,7 +86,7 @@ onMounted(() => {
 .training {
   padding: 2rem;
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   &__details {
     //shared styles for program and state sections
     margin: 1rem 0;
@@ -89,11 +94,20 @@ onMounted(() => {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    gap: 1rem;
     justify-content: space-around;
+    &__data {
+      font-weight: bold;
+      width: 100%;
+    }
   }
   &__state {
-    max-width: 420px;
-    margin-inline-start: 2rem;
+    border: none;
+    border-radius: 0px;
+    border-left: 1px solid var(--border-color);
+    margin-inline-start: 1rem;
   }
 }
 

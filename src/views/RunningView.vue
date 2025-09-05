@@ -193,7 +193,7 @@ const startTracking = () => {
       },
       {
         enableHighAccuracy: true,
-        maximumAge: 1000, // 10 seconds
+        maximumAge: 10000, // 10 seconds
       },
     )
   } else {

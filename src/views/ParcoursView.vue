@@ -13,6 +13,7 @@ const isHovered = ref(null)
 //computed
 const currentUser = computed(() => UserStore.currentUser)
 const allParcours = computed(() => ParcoursStore.allParcours)
+const currentParcours = computed(() => ParcoursStore.currentParcours)
 
 //check if curentUser is defined
 onBeforeMount(() => {
@@ -58,9 +59,10 @@ onMounted(() => {
             <p>{{ parcours.description }}</p>
             <p>Durée: {{ parcours.duree }}</p>
             <div class="parcours__list__item__infos__progress" v-if="currentUser.parcours">
-              Votre progression de la semaine {{ currentUser.parcours.week }}:
+              Votre progression du programme:
               <progress class="progress is-small is-info"
-                :value="currentUser.parcours.day-1" max="3"></progress>
+                :value="currentUser.parcours.week" max="12"></progress>
+                <button class="button is-warning" @click.prevent="UserStore.deleteParcours()">Se désincrire du parcours</button>
             </div>
           </div>
           <button
