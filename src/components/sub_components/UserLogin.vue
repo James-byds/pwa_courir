@@ -11,8 +11,13 @@ const password = ref('')
 
 <template>
   <section class="user-login" v-if="currentUser">
+    <span class="icon is-small is-left">
+      <font-awesome-icon :icon="['fas', 'person-running']" />
+    </span>
     <span class="user-login__label">Logged in as: {{ currentUser.login }}</span>
-    <button @click="UserStore.logout()" class="button is-danger">Log Out</button>
+    <button @click="UserStore.logout()" class="button is-danger">
+      Log Out <font-awesome-icon :icon="['fas', 'sign-out-alt']" />
+    </button>
   </section>
   <section class="user-login" v-else>
     <div class="user-login__icons">
@@ -45,7 +50,7 @@ const password = ref('')
       class="button is-primary user-login__input"
       @click.prevent="UserStore.authenticate(login, password)"
     >
-      Log In
+      <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Log In
     </button>
   </section>
 </template>
