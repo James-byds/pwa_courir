@@ -1,10 +1,14 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/users'
+import { setLocalStorage } from '@/assets/localstorage'
 
 const UserStore = useUserStore()
 const currentUser = computed(() => UserStore.currentUser)
+watch(currentUser, () => {
+  setLocalStorage("users", currentUser.value)
+})
 
 const router = useRouter()
 const currentRoute = computed(() => router.currentRoute.value)

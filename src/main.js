@@ -9,6 +9,14 @@ const app = createApp(App)
 import 'bulma/css/bulma.min.css'
 import '@/assets/main.scss'
 
+//scripts de localstorage
+import { initLocalStorage, getLocalStorage } from '@/assets/localstorage.js'
+initLocalStorage()
+
+//provide to app
+app.provide('users', getLocalStorage().users)
+app.provide('parcours', getLocalStorage().parcours)
+
 //font awesome imports 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

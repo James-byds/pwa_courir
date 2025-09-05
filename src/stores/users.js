@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useFetch } from '@vueuse/core'
+import { removeLocalStorage } from '@/assets/localstorage'
 
 /*Local values
 const apiUrl = 'http://127.0.0.1/api_courrir/api/content/item/users' //for later uses
@@ -63,6 +64,7 @@ export const useUserStore = defineStore('user', {
     },
     logout() {
       this.currentUser = null
+      removeLocalStorage("users")
       //redirect to home page
       window.location.href = '/'
     },
