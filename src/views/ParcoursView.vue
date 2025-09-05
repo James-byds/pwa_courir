@@ -13,7 +13,6 @@ const isHovered = ref(null)
 //computed
 const currentUser = computed(() => UserStore.currentUser)
 const allParcours = computed(() => ParcoursStore.allParcours)
-const currentParcours = computed(() => ParcoursStore.currentParcours)
 
 //check if curentUser is defined
 onBeforeMount(() => {
@@ -21,14 +20,6 @@ onBeforeMount(() => {
     window.location.href = '/'
   }
 })
-
-//filter parcours
-const filteredParcours = computed(() => {
-  return allParcours.value.filter((parcours) => {
-    return parcours._id == currentUser.value?.parcours?.parcours_id._id
-  })
-})
-
 //fetch parcours
 onMounted(() => {
   ParcoursStore.fetchParcours()
@@ -49,9 +40,9 @@ onMounted(() => {
       <p>Continuez votre progression en cliquant sur le bouton ci-dessous</p>
       <router-link to="/training" class="button is-primary">Programme d'entrainement</router-link>
     </div>
-    <section v-if="filteredParcours">
+    <section v-if="allParcours">
       <ol class="parcours__list">
-        <li v-for="parcours in filteredParcours" :key="parcours.id" class="parcours__list__item card"
+        <li v-for="parcours in allParcours" :key="parcours.id" class="parcours__list__item card"
         :class="{'is-info': parcours._id === currentUser?.parcours?.parcours_id._id}">
           <!--INFOS GENERALES DU PARCOURS-->
           <h2 class="parcours__list__item__name">{{ parcours.name }}</h2>
@@ -78,7 +69,7 @@ onMounted(() => {
         </li>
       </ol>
     </section>
-    <p v-else="!allParcours">fetch foiré</p>
+    <p v-else>fetch foiré</p>
   </main>
 </template>
 
