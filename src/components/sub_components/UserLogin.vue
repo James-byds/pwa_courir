@@ -11,9 +11,9 @@ const password = ref('')
 
 <template>
   <section class="user-login" v-if="currentUser">
-    <span class="user-login__label">Logged in as: {{ currentUser.login }}</span>
+    <span class="user-login__label">Bonjour {{ currentUser.login }}</span>
     <button @click="UserStore.logout()" class="button is-danger">
-      Log Out <font-awesome-icon :icon="['fas', 'sign-out-alt']" />
+      Déconnexion <font-awesome-icon :icon="['fas', 'sign-out-alt']" />
     </button>
   </section>
   <section class="user-login" v-else>
@@ -21,7 +21,7 @@ const password = ref('')
       <font-awesome-icon :icon="['fas', 'user']" class="icon is-small" />
       <input
       type="text"
-      placeholder="Login"
+      placeholder="Nom d'utilisateur"
       name="login"
       class="input user-login__input"
       v-model.lazy.trim="login"
@@ -30,7 +30,7 @@ const password = ref('')
       <font-awesome-icon :icon="['fas', 'unlock']" />
       <input
         type="password"
-        placeholder="Password"
+        placeholder="Mot de passe"
         class="input user-login__input"
         v-model.lazy.trim="password"
         required
@@ -40,7 +40,7 @@ const password = ref('')
       class="button is-primary user-login__input"
       @click.prevent="UserStore.authenticate(login, password)"
     >
-      <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Log In
+      <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Connexion
     </button>
   </section>
 </template>
@@ -51,27 +51,16 @@ const password = ref('')
   align-items: self-end;
   justify-content: center;
   gap: 1rem;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   padding: 1.5rem;
   border-inline-start: 2px solid var(--border-color);
-  &__icons {
-    align-self: stretch;
-    display: flex;
-    align-items:flex-end;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    flex-direction: column;
-    margin-block-start: 1.2rem;
-  }
   &__label {
-    display: block;
     color: var(--color-text);
-    width: 100%;
     flex: 1;
   }
   &__input {
     display: block;
+    margin: 0.5rem 0;
     max-width: 200px;
   }
 }

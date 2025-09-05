@@ -6,8 +6,10 @@ import UserLogin from '@/components/sub_components/UserLogin.vue'
 <template>
   <header class="global-header">
     <section class="global-header__user">
-      <img src="@/assets/img/logo.png" alt="logo" class="global-header__user__img"/>
-      <h1 class="global-header__user__title">Je cours pour ma forme</h1>
+      <div class="global-header__user__title">
+        <img src="@/assets/img/logo.png" alt="logo" class="global-header__user__title__img"/>
+        <h1 class="global-header__user__title__text">Je cours pour ma forme</h1>
+      </div>
       <UserLogin />
     </section>
     <MainNav />
@@ -16,7 +18,7 @@ import UserLogin from '@/components/sub_components/UserLogin.vue'
 
 <style scoped lang="scss">
 .global-header {
-  background-color: #333; //integrer les couleurs de la MC
+  background-color: #555; //integrer les couleurs de la MC
   padding: 1rem;
   display: flex;
   flex-wrap: wrap;
@@ -26,18 +28,23 @@ import UserLogin from '@/components/sub_components/UserLogin.vue'
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    &__img {
-      color: white;
-      margin: 0 1rem 0 0;
-      min-width: 50px;
-      aspect-ratio: 1/1;
-      max-width: 250px;
-    }
     &__title {
-      color: white;
-      font-size: var(--font-size-lg);
-      font-weight: bold;
-      text-transform: capitalize;
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      justify-content: center;
+      &__img {
+        color: white;
+        margin: 0 1rem 0 0;
+        min-width: 50px;
+        aspect-ratio: 1/1;
+        max-width: 150px;
+      }
+      &__text {
+        color: white;
+        font-size: var(--font-size-lg);
+        font-weight: bold;
+      }
     }
   }
 }
