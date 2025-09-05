@@ -1,35 +1,54 @@
-# pwa_courir
+# PWA Courir
+PWA Courir est une application web progressive (PWA) disponible en ligne à l’adresse suivante :
+👉 https://pwa-courir.vercel.app
+Elle s’interface avec une API Cockpit headless CMS accessible ici :
+👉 https://ingrwf12.cepegra-frontend.xyz/cockpit_james_2/api.
 
-This template should help get you started developing with Vue 3 in Vite.
+## Fonctionnalités
+* Application responsive utilisable sur mobile, tablette, (desktop pas adapté)
 
-## Recommended IDE Setup
+* Installation possible sur l’écran d’accueil (PWA)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+* Récupération et affichage de données dynamiques via Cockpit CMS
 
-## Customize configuration
+* Hébergement & déploiement automatisé via Vercel.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Technologies
+* Framework : Vue.js
 
-## Project Setup
+* Backend : Cockpit Headless CMS
 
-```sh
-npm install
-```
+* Déploiement : Vercel
+ 
+* API : REST/JSON fournie par Cockpit
 
-### Compile and Hot-Reload for Development
+## Prérequis
+Node.js v18+ recommandé
 
-```sh
-npm run dev
-```
+## Accès à l’API Cockpit (clé et endpoint)
 
-### Compile and Minify for Production
+> git clone [url de ce repo]
+> cd pwa-courir
+> npm install
+> npm run dev
 
-```sh
-npm run build
-```
+### Déploiement
+La livraison continue est automatique via Vercel :
 
-### Lint with [ESLint](https://eslint.org/)
+Pousser le code sur la branche principale, le build et le déploiement sont déclenchés automatiquement.
 
-```sh
-npm run lint
-```
+> Pour un déploiement manuel ou local, utiliser :
+> npm run build
+> npm run start
+
+### Configuration
+La configuration de l’API se fait via une variable d’environnement API_URL.
+
+Adapter le manifest.json pour personnaliser l’apparence et les métadonnées PWA.
+
+### API
+La récupération des données se base sur l’API Cockpit :
+
+Endpoint : https://ingrwf12.cepegra-frontend.xyz/cockpit_james_2/api
+
+Documentation API : se référer à l’interface d’administration Cockpit pour connaître les collections et endpoints disponibles.
