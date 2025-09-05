@@ -21,6 +21,13 @@ onBeforeMount(() => {
   }
 })
 
+//filter parcours
+const filteredParcours = computed(() => {
+  return allParcours.value.filter((parcours) => {
+    return parcours._id == currentUser.value?.parcours?.parcours_id._id
+  })
+})
+
 //fetch parcours
 onMounted(() => {
   ParcoursStore.fetchParcours()
@@ -31,21 +38,35 @@ onMounted(() => {
 <template>
   <GlobalHeader />
   <main class="parcours">
-    <h1 class="title">Listes des programmes d'entrainement</h1>
-    <p>Retrouvez les programmes d'entrainement disponibles</p>
-    <p>Une fois inscrits, vous pourrez suivre votre progression</p>
-    <section v-if="allParcours">
+    <div class="parcours_intro" v-if="!currentUser.parcours">
+      <h1 class="title">Listes des programmes d'entrainement</h1>
+      <p>Retrouvez les programmes d'entrainement disponibles</p>
+      <p>Une fois inscrits, vous pourrez suivre votre progression</p>
+    </div>
+    <div class="parcours_intro" v-else>
+      <h1 class="title">Vous etes inscrit à un programme d'entrainement</h1>
+      <p>Continuez votre progression en cliquant sur le bouton ci-dessous</p>
+      <router-link to="/training" class="button is-primary">Programme d'entrainement</router-link>
+    </div>
+    <section v-if="filteredParcours">
       <ol class="parcours__list">
-        <li v-for="parcours in allParcours" :key="parcours.id" class="parcours__list__item card">
+        <li v-for="parcours in filteredParcours" :key="parcours.id" class="parcours__list__item card"
+        :class="{'is-info': parcours._id === currentUser?.parcours?.parcours_id._id}">
           <!--INFOS GENERALES DU PARCOURS-->
           <h2 class="parcours__list__item__name">{{ parcours.name }}</h2>
           <div class="parcours__list__item__infos card-content">
             <p>{{ parcours.description }}</p>
             <p>Durée: {{ parcours.duree }}</p>
+            <div class="parcours__list__item__infos__progress" v-if="currentUser.parcours">
+              Votre progression de la semaine {{ currentUser.parcours.week }}:
+              <progress class="progress is-small is-info"
+                :value="currentUser.parcours.day-1" max="3"></progress>
+            </div>
           </div>
           <button
             class="button is-success is-fullwidth parcours__list__item__button"
             :class="{ 'is-outlined': isHovered !== parcours._id }"
+            :disabled="parcours._id === currentUser?.parcours?.parcours_id._id"
             @mouseover="isHovered = parcours._id"
             @mouseleave="isHovered = null"
             @click.prevent="UserStore.registerParcours(parcours._id)"
@@ -60,6 +81,9 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
+.parcours {
+  text-align: center;
+}
 .parcours__list {
   display: flex;
   flex-direction: column;

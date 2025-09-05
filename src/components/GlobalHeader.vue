@@ -10,15 +10,15 @@ import UserLogin from '@/components/sub_components/UserLogin.vue'
         <img src="@/assets/img/logo.png" alt="logo" class="global-header__user__title__img"/>
         <h1 class="global-header__user__title__text">Je cours pour ma forme</h1>
       </div>
-      <UserLogin />
     </section>
-    <MainNav />
+    <UserLogin />
   </header>
+  <MainNav />
 </template>
 
 <style scoped lang="scss">
 .global-header {
-  background-color: #555; //integrer les couleurs de la MC
+  background: linear-gradient(to bottom, white, #88ba16); //degrade du vert vers le blanc
   padding: 1rem;
   display: flex;
   flex-wrap: wrap;

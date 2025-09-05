@@ -55,6 +55,7 @@ const password = ref('')
   padding: 1.5rem;
   border-inline-start: 2px solid var(--border-color);
   background-color: var(--primary-color);
+  margin-inline: auto;
   &__label {
     flex: 1;
   }

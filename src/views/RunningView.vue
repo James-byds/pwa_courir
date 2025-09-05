@@ -21,7 +21,7 @@ const currentParcours = computed(() => ParcoursStore.currentParcours)
 const etape = ref(0) //current step in the exercices
 const timer = ref(null) //timer reference for clearing it later
 const rawTimer = ref(null) //timer reference for clearing it later
-const state = ref('au repos') //au repos, course, pause
+const state = ref('repos') //repos, course, pause
 const course = ref(null)
 //init tracking values
 const distanceTotal = ref(0)
@@ -70,12 +70,12 @@ const startTraining = () => {
       } else {
         clearInterval(course.value)
         course.value = null
-        state.value = 'au repos'
+        state.value = 'repos'
       }
       convertTimer(rawTimer)
     }, 1000)
     console.log('Training resumed')
-  } else if (state.value === 'au repos' && !course.value) {
+  } else if (state.value === 'repos' && !course.value) {
     // fresh start
     startTracking() //tracking distance
     etape.value = 0
@@ -90,7 +90,7 @@ const startTraining = () => {
       } else {
         clearInterval(course.value)
         course.value = null
-        state.value = 'au repos'
+        state.value = 'repos'
         console.log('Training finished')
         //progress the user
         UserStore.progressTraining(currentParcours.value.semaines.length)
@@ -119,7 +119,7 @@ const stopTraining = () => {
     course.value = null
   }
   //resets values
-  state.value = 'au repos'
+  state.value = 'repos'
   etape.value = 0
   rawTimer.value = program.value[etape.value].duree * 60
   console.log('Training stopped')
@@ -216,12 +216,9 @@ const pauseTracking = () => {
 
 <template>
   <main class="course">
-    <h1>Cours hein gamin</h1>
     <p v-show="!currentUser">Veuillez vous connnecter</p>
     <p v-if="currentUser">Courreur: {{ currentUser.login }}</p>
     <p v-if="currentUser">Nom du parcours: {{ currentParcours.name }}</p>
-    {{ day.value }}
-    <p>etat de l'entrainement: {{ state }}</p>
     <section class="course__dashboard">
       <div class="course__dashboard__step">
         <p>{{ program[etape].type }}</p>
@@ -231,7 +228,8 @@ const pauseTracking = () => {
       </div>
       <div class="course__dashboard__state">
         <p>Etape {{ etape + 1 }}/{{ program.length }}</p>
-        <progress class="progress is-success" :value="etape + 1" :max="program.length"></progress>
+        <progress class="progress"
+        :class="program[etape].type" :value="etape + 1" :max="program.length"></progress>
         <p>Semaine {{ week }}/ Jour {{ day }}</p>
       </div>
       <div class="course__dashboard__next">
@@ -244,12 +242,12 @@ const pauseTracking = () => {
       </div>
     </section>
     <section class="controls">
-      <button class="button is-success" @click.prevent="startTraining()">
+      <button class="button is-success" @click.prevent="startTraining()" v-show="state !== 'course'">
         <p v-if="state === 'pause'">Reprendre</p>
-        <p v-else>Commencer</p>
+        <p v-else-if="state === 'repos'">Commencer</p>
       </button>
-      <button class="button is-warning" @click.prevent="pauseTraining()"><p>Pause</p></button>
-      <button class="button is-danger" @click.prevent="stopTraining()"><p>Stop</p></button>
+      <button class="button is-warning" @click.prevent="pauseTraining()" v-show="state === 'course'"><p>Pause</p></button>
+      <button class="button is-danger" @click.prevent="stopTraining()" v-show="state !== 'repos'"><p>Stop</p></button>
     </section>
   </main>
   <router-link to="/" class="button">
@@ -271,9 +269,8 @@ const pauseTracking = () => {
     justify-content: space-around;
     margin: 1rem;
     & div {
-      width: 40%;
+      width: 85%;
       padding: 1rem;
-      margin: 1rem 0;
       border-radius: 8px;
       display: flex;
       flex-direction: column;
@@ -313,5 +310,17 @@ const pauseTracking = () => {
     padding-block: 0.5rem;
   }
 }
-
+//exercice type dependant styles
+.échauffement::-moz-progress-bar {
+  background-color: var(--color-echauffement);
+}
+.trot::-moz-progress-bar {
+  background-color: var(--color-trot);
+}
+.marche::-moz-progress-bar {
+  background-color: var(--color-marche);
+}
+.etirement {
+  background-color: var(--color-etirement);
+}
 </style>
