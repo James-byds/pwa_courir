@@ -61,7 +61,7 @@ onMounted(() => {
       </section>
     </section>
     <section class="controls">
-      <router-link to="/running" :day="day" :week="week" class="button is-success">
+      <router-link to="/running" class="button is-success">
         On y va !
       </router-link>
       <!--start of reset controls-->

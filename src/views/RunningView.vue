@@ -29,7 +29,11 @@ const positions = ref([])
 const watchId = ref(null)
 const steps = ref(0)
 
-onBeforeMount(() => {})
+onBeforeMount(() => {
+  if (!currentUser.value) {
+    window.location.href = '/'
+  }
+})
 //recover parcours structure and program for the day
 if (currentUser.value != null) {
   ParcoursStore.selectParcours(currentUser.value.parcours.parcours_id._id) //should be linked to user parcours._id//should be linked to user parcours._id
