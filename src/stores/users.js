@@ -2,7 +2,10 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useFetch } from '@vueuse/core'
 
+/*Local values
 const apiUrl = 'http://127.0.0.1/api_courrir/api/content/item/users' //for later uses
+*/
+const apiUrl = 'https://ingrwf12.cepegra-frontend.xyz/cockpit_james_2/api/content/item/users' //for later uses
 
 export const useUserStore = defineStore('user', {
   state: () => ({

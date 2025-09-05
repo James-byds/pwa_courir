@@ -2,8 +2,12 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useFetch } from '@vueuse/core'
 
+/*Local values
 const apiUrl = 'http://127.0.0.1/api_courrir/api/content/items/parcours' //for later uses
 const apiUrlSolo = 'http://127.0.0.1/api_courrir/api/content/item/parcours' //for later uses
+*/
+const apiUrl = 'https://ingrwf12.cepegra-frontend.xyz/cockpit_james_2/api/content/items/parcours' //for later uses
+const apiUrlSolo = 'https://ingrwf12.cepegra-frontend.xyz/cockpit_james_2/api/content/item/parcours' //for later uses
 
 export const useParcoursStore = defineStore('Parcours', {
   state: () => ({
