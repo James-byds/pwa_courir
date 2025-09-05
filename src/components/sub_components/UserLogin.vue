@@ -15,12 +15,14 @@ const password = ref('')
     <button @click="UserStore.logout()" class="button is-danger">Log Out</button>
   </section>
   <section class="user-login" v-else>
-    <span class="icon is-small is-left">
-      <font-awesome-icon :icon="['fas', 'user']" />
-    </span>
-    <span class="icon is-small is-left">
-      <font-awesome-icon :icon="['fas', 'unlock']" />
-    </span>
+    <div class="user-login__icons">
+      <span class="icon is-small is-left">
+        <font-awesome-icon :icon="['fas', 'user']" />
+      </span>
+      <span class="icon is-small is-left">
+        <font-awesome-icon :icon="['fas', 'unlock']" />
+      </span>
+    </div>
     <fieldset class="user-login__label">
       Log In
       <input
@@ -57,6 +59,16 @@ const password = ref('')
   flex-wrap: wrap;
   padding: 1.5rem;
   border-inline-start: 2px solid var(--border-color);
+  &__icons {
+    align-self: stretch;
+    display: flex;
+    align-items:flex-end;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-block-start: 1.2rem;
+  }
   &__label {
     display: block;
     color: var(--color-text);
