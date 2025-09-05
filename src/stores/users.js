@@ -105,7 +105,7 @@ export const useUserStore = defineStore('user', {
     deleteParcours() {
       if (this.currentUser) {
         this.currentUser.parcours = null
-        this.postRequest()
+        this.postRequest()//
       }
     },
     //progress
